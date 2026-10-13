@@ -6,21 +6,20 @@ from sklearn.metrics import roc_auc_score, roc_curve
 from sklearn.calibration import calibration_curve
 
 from analysis.dca import net_benefit, net_benefit_treat_all, net_benefit_treat_none
+from analysis.inference import pooled_oof
 
 
 def _pooled(y, oof_records):
-    """把每折 (索引, 概率) 拼回与原样本对齐的 OOF 概率向量。
+    """`analysis.inference.pooled_oof` 的 plot 层别名。
 
-    多次 CV 重复覆盖同一样本时取各次重复预测的均值（重复 CV 的
-    averaged out-of-fold 预测，曲线更稳定）。
+    共享实现（多重复取均值）只有一份，位于 `analysis.inference`；这里仅把
+    覆盖不全时的 `ValueError` 翻译成 plot 层历史上的 `AssertionError`，以保持
+    既有调用方/测试的行为不变。新代码请直接使用 `pooled_oof`（抛 `ValueError`）。
     """
-    total = np.zeros(len(y))
-    count = np.zeros(len(y))
-    for idx, proba in oof_records:
-        total[idx] += proba
-        count[idx] += 1
-    assert np.all(count > 0), "OOF predictions must cover all samples"
-    return total / count
+    try:
+        return pooled_oof(y, oof_records)
+    except ValueError as exc:
+        raise AssertionError(str(exc)) from exc
 
 
 def plot_roc(y, oof_records: dict, out_path) -> str:
