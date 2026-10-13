@@ -1,6 +1,6 @@
-# ITM 投稿：CRT 应答预测的表格机器学习 + SHAP 可解释性 实施计划
+# ITM 投稿：CRT 应答预测的表格机器学习 + SHAP 可解释性 实施计划（v1，已作废）
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **本计划已被 `2026-10-13-itm-crt-ai-v2.md` 取代，不要再执行。** v1 假设仓库是空白的、要新建 `src/crt_ai/` 包；实际仓库已有完整且 49 测试全绿的 `analysis/` 实现，用户裁定改为**扩展 `analysis/`**（见 v2 计划与 SDD ledger 的 Ruling R5）。以下内容仅作历史归档保留。
 
 **Goal:** 在已有的 163 例 CRT 患者 SPECT 相位分析数据上，构建一套泄漏安全（leakage-safe）的表格机器学习基准 + SHAP 可解释性流水线，产出满足 *Intelligent Translational Medicine*（ITM）"AI 算法层"要求的 article 级结果工件。
 
