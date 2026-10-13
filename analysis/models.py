@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, StackingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
@@ -10,7 +10,7 @@ from lightgbm import LGBMClassifier
 
 from analysis.config import RANDOM_SEED
 from analysis.preprocessing import AutoPreprocessor
-from analysis.baseline import make_baseline_pipeline
+from analysis.baseline import UnivariateLRFilter, make_baseline_pipeline
 
 
 class TabNetWrapper(BaseEstimator, ClassifierMixin):
@@ -62,6 +62,37 @@ def _pipe(clf) -> Pipeline:
     return Pipeline([("pre", AutoPreprocessor()), ("clf", clf)])
 
 
+def make_stacking_pipeline(seed=RANDOM_SEED, light=False) -> Pipeline:
+    """二层概率 stacking：5 个异质基学习器 + L2 logistic 元学习器。
+
+    基学习器超参固定（不调），只调元学习器的 C，以控制嵌套 CV 的计算量。
+    最外层是 AutoPreprocessor，基学习器看到的都是折内预处理后的数据；
+    LASSO 基学习器内部仍带 UnivariateLRFilter，选择发生在折内。
+    """
+    lasso = Pipeline([
+        ("univar", UnivariateLRFilter(p_threshold=0.05)),
+        ("clf", LogisticRegression(penalty="l1", solver="liblinear", C=1.0,
+                                   max_iter=5000, random_state=seed))])
+    bases = [
+        ("lasso", lasso),
+        ("svm", SVC(probability=True, C=1.0, gamma="scale", random_state=seed)),
+        ("rf", RandomForestClassifier(n_estimators=30 if light else 200,
+                                      max_features="sqrt", random_state=seed, n_jobs=1)),
+        ("xgb", XGBClassifier(n_estimators=10 if light else 100, max_depth=2,
+                              learning_rate=0.1, subsample=0.8, reg_lambda=1.0,
+                              eval_metric="logloss", random_state=seed,
+                              n_jobs=1, verbosity=0)),
+        ("lgbm", LGBMClassifier(n_estimators=10 if light else 100, num_leaves=7,
+                                min_child_samples=10, random_state=seed,
+                                n_jobs=1, verbose=-1)),
+    ]
+    meta = LogisticRegression(penalty="l2", C=1.0, max_iter=5000, random_state=seed)
+    stack = StackingClassifier(estimators=bases, final_estimator=meta,
+                               cv=2 if light else 3, stack_method="predict_proba",
+                               passthrough=False, n_jobs=1)
+    return Pipeline([("pre", AutoPreprocessor()), ("clf", stack)])
+
+
 def get_models(seed=RANDOM_SEED, light=False) -> dict:
     mlp = MLPClassifier(
         hidden_layer_sizes=(32, 16), alpha=0.5, activation="relu",
@@ -92,6 +123,7 @@ def get_models(seed=RANDOM_SEED, light=False) -> dict:
         "LightGBM": _pipe(lgbm),
         "MLP": _pipe(mlp),
         "TabNet": _pipe(tabnet),
+        "Stacking": make_stacking_pipeline(seed, light),
     }
 
 
@@ -118,4 +150,5 @@ def get_grids(seed=RANDOM_SEED, light=False) -> dict:
         "TabNet": [
             {"clf__n_steps": [3, 4], "clf__n_d": [8, 16]},
         ],
+        "Stacking": [{"clf__final_estimator__C": [0.1, 1.0]}],
     }
