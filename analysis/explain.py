@@ -14,15 +14,26 @@ def _final_estimator(model):
 
 
 def _transform_features(model, X):
-    if hasattr(model, "steps") and model.steps[0][0] == "pre":
-        return model.steps[0][1].transform(X)
-    return np.asarray(X, dtype=np.float64)
+    """应用管道中分类器之前的全部变换步骤，并返回变换后特征对应的原始列索引。
+
+    支持会丢列的中间步骤（如 UnivariateLRFilter）：kept 记录变换后各列
+    对应的原始特征索引，供 SHAP 重要性映射回完整特征名。
+    """
+    Xt = np.asarray(X, dtype=np.float64)
+    kept = list(range(Xt.shape[1]))
+    if hasattr(model, "steps"):
+        for _, step in model.steps[:-1]:
+            Xt = step.transform(Xt)
+            if hasattr(step, "kept_idx_"):
+                kept = [kept[i] for i in step.kept_idx_]
+    return Xt, kept
 
 
 def explain_best(model, X, feature_names, out_dir, seed=2025) -> dict:
     X = np.asarray(X, dtype=np.float64)
-    Xt = _transform_features(model, X)
+    Xt, kept = _transform_features(model, X)
     clf = _final_estimator(model)
+    kept_names = [feature_names[i] for i in kept]
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -44,11 +55,13 @@ def explain_best(model, X, feature_names, out_dir, seed=2025) -> dict:
         elif sv.shape[0] == 2:
             sv = sv[1]
 
-    importance = pd.Series(np.abs(sv).mean(axis=0), index=feature_names)
+    # 变换后列上的重要性映射回完整特征名（被筛掉的列为 0）
+    importance = pd.Series(0.0, index=feature_names)
+    importance.iloc[kept] = np.abs(sv).mean(axis=0)
     importance = importance.sort_values(ascending=False)
 
     plt.figure()
-    shap.summary_plot(sv, Xt, feature_names=feature_names, show=False)
+    shap.summary_plot(sv, Xt, feature_names=kept_names, show=False)
     plt.tight_layout(); plt.savefig(out_dir / "shap_summary.png", dpi=200)
     plt.close("all")
 

@@ -19,12 +19,15 @@ def test_plots_write_files(tmp_path):
         assert os.path.exists(p) and os.path.getsize(p) > 0
 
 def test_multiple_repeats_pooled(tmp_path):
-    # 多次重复的 OOF 记录也能正常绘图（后写覆盖同位置单元格）
+    # 多次重复的 OOF 记录：同一单元格取均值而非覆盖
     y2 = rng.integers(0, 2, 40)
-    idx1 = np.arange(0, 20); idx2 = np.arange(20, 40)
-    oof2 = {
-        "M": [(idx1, rng.random(20)), (idx2, rng.random(20))],
-    }
+    idx = np.arange(40)
+    p_rep1 = np.full(40, 0.2)
+    p_rep2 = np.full(40, 0.8)
+    oof2 = {"M": [(idx, p_rep1), (idx, p_rep2)]}
+    from analysis.plots import _pooled
+    pooled = _pooled(y2, oof2["M"])
+    assert np.allclose(pooled, 0.5)  # (0.2+0.8)/2
     p = plot_roc(y2, oof2, tmp_path / "roc2.png")
     assert os.path.exists(p) and os.path.getsize(p) > 0
 

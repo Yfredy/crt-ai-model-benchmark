@@ -38,3 +38,16 @@ def test_explain_kernel_path(tmp_path):
     result = explain_best(model, X, names, tmp_path, seed=1)
     assert result["method"] == "KernelExplainer"
     assert len(result["importance"]) == 4
+
+def test_explain_pipeline_with_feature_selection(tmp_path):
+    # 含 UnivariateLRFilter 的基线管道：SHAP 不能崩，重要性需映射回全部 4 个特征名
+    from analysis.baseline import make_baseline_pipeline
+    model = make_baseline_pipeline(seed=1).fit(X, y)
+    result = explain_best(model, X, names, tmp_path, seed=1)
+    assert result["method"] == "KernelExplainer"
+    assert set(result["importance"].index) == set(names)
+    # 被单变量筛选剔除的噪声列重要性应为 0
+    dropped = [n for n in names
+               if n not in [names[i] for i in model.named_steps["univar"].kept_idx_]]
+    for d in dropped:
+        assert result["importance"][d] == 0.0

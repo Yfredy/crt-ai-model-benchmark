@@ -10,6 +10,13 @@
 
 **Spec:** `背景说明.md`（项目背景、编辑意见、数据集说明）。计划据此argues：编辑要求"增加 AI 算法、深度学习、大数据挖掘内容"；聊天记录要求"测试哪种 AI 模型与当前数据最适配，response 是因变量"。
 
+## 执行环境（重要：使用本机已有环境，勿创建/安装新环境）
+
+- **解释器**：`C:\Users\yaoyue\miniconda3\python.exe`（Python 3.12.4，conda base）。
+- **已具备全部依赖**：numpy 2.4.6 / pandas 2.3.3 / scipy 1.18.0 / scikit-learn 1.9.0 / xgboost 3.4.1 / lightgbm 4.7.0 / shap 0.53.0 / pytorch-tabnet / torch 2.6.0+cu124 / matplotlib 3.11.1 / pytest 9.1.1 / tabulate 0.10.0 / openpyxl 3.1.5。
+- **GPU**：NVIDIA RTX 4060 Laptop（CUDA 12.4 可用）。仍按 Global Constraints 以 CPU 运行（n=163 GPU 无收益）；如切 GPU，改 `analysis/models.py` 中 TabNet `device_name`。
+- **规则**：本计划文本中凡出现的 `.venv/Scripts/python` 一律替换为上面的解释器；**禁止** `pip install` 或新建虚拟环境（用户明确要求）。
+
 ## Global Constraints
 
 - 数据文件 `data.xlsx` **只读**，任何任务不得修改/移动/重命名它。

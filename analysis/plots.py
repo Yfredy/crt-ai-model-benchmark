@@ -11,13 +11,16 @@ from analysis.dca import net_benefit, net_benefit_treat_all, net_benefit_treat_n
 def _pooled(y, oof_records):
     """把每折 (索引, 概率) 拼回与原样本对齐的 OOF 概率向量。
 
-    多次 CV 重复覆盖同一批样本时，以最后一次重复的折外预测为准（仅用于绘图）。
+    多次 CV 重复覆盖同一样本时取各次重复预测的均值（重复 CV 的
+    averaged out-of-fold 预测，曲线更稳定）。
     """
-    p = np.full(len(y), np.nan)
+    total = np.zeros(len(y))
+    count = np.zeros(len(y))
     for idx, proba in oof_records:
-        p[idx] = proba
-    assert not np.any(np.isnan(p)), "OOF predictions must cover all samples"
-    return p
+        total[idx] += proba
+        count[idx] += 1
+    assert np.all(count > 0), "OOF predictions must cover all samples"
+    return total / count
 
 
 def plot_roc(y, oof_records: dict, out_path) -> str:
