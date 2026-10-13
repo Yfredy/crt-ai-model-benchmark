@@ -37,17 +37,19 @@ def delong_roc_variance(y_true, y_scores):
     k = S.shape[0]
     tx = np.empty((k, m)); ty = np.empty((k, n)); tz = np.empty((k, m + n))
     for r in range(k):
-        v01, v10 = pos[r], neg[r]
-        tx[r] = _midrank(v01)
-        ty[r] = _midrank(v10)
-        tz[r] = _midrank(np.concatenate([v01, v10]))
+        pr, nr = pos[r], neg[r]
+        tx[r] = _midrank(pr)
+        ty[r] = _midrank(nr)
+        tz[r] = _midrank(np.concatenate([pr, nr]))
     aucs = tz[:, :m].sum(axis=1) / (m * n) - (m + 1.0) / (2.0 * n)
-    # Sun & Xu (2014) 的结构分量必须按 n / m 归一化，否则方差被放大 O(m*n) 倍
-    v01 = (tz[:, :m] - tx) / n
-    v10 = 1.0 - (tz[:, m:] - ty) / m
-    s01 = np.atleast_2d(np.cov(v01) if k > 1 else np.var(v01[0], ddof=1))
-    s10 = np.atleast_2d(np.cov(v10) if k > 1 else np.var(v10[0], ddof=1))
-    return aucs, s01 / m + s10 / n
+    # Sun & Xu (2014) 的结构分量必须按 n / m 归一化，否则方差被放大 O(m*n) 倍。
+    # v_pos 是阳性侧分量（DeLong 1988 记 V10），v_neg 是阴性侧分量（记 V01）；
+    # Var(AUC) = S_pos/m + S_neg/n。
+    v_pos = (tz[:, :m] - tx) / n
+    v_neg = 1.0 - (tz[:, m:] - ty) / m
+    s_pos = np.atleast_2d(np.cov(v_pos) if k > 1 else np.var(v_pos[0], ddof=1))
+    s_neg = np.atleast_2d(np.cov(v_neg) if k > 1 else np.var(v_neg[0], ddof=1))
+    return aucs, s_pos / m + s_neg / n
 
 
 def delong_test(y_true, prob_a, prob_b):
