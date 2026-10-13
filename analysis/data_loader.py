@@ -55,3 +55,14 @@ def split_xy(df: pd.DataFrame):
     X = df[feature_names].to_numpy(dtype=np.float64)
     y = df[TARGET_COL].to_numpy(dtype=np.int64)
     return X, y, feature_names
+
+
+def column_kinds(df) -> dict:
+    """返回 {'binary': [...], 'continuous': [...]}；判定标准与 AutoPreprocessor 一致：
+    取值 ⊆ {0,1}（忽略 NaN）视为二值。不含 TARGET_COL。"""
+    feats = [c for c in df.columns if c != TARGET_COL]
+    binary, cont = [], []
+    for c in feats:
+        v = df[c].dropna().unique()
+        (binary if set(v) <= {0, 1} else cont).append(c)
+    return {"binary": binary, "continuous": cont}
