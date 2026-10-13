@@ -1,5 +1,9 @@
-.venv/
 __pycache__/
 *.pyc
-.pytest_cache/
 outputs/
+.pytest_cache/
+.superpowers/
+.venv/
+outputs_v1/
+.workbuddy/
+*.log
