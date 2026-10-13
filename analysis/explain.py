@@ -8,6 +8,16 @@ from pathlib import Path
 
 TREE_MODELS = ("XGBClassifier", "LGBMClassifier", "RandomForestClassifier")
 
+# 仅用于图形显示的列名缩写（数据与返回值仍用原始列名）
+DISPLAY_NAMES = {
+    "NT_proBNP(<1000=1; 1000~2499=2; 2500~4999=3; 5000~1000=4; >10000=5)":
+        "NT_proBNP (ordinal 1-5)",
+}
+
+
+def _display(name: str) -> str:
+    return DISPLAY_NAMES.get(name, name)
+
 
 def _final_estimator(model):
     return model[-1] if hasattr(model, "steps") else model
@@ -61,12 +71,14 @@ def explain_best(model, X, feature_names, out_dir, seed=2025) -> dict:
     importance = importance.sort_values(ascending=False)
 
     plt.figure()
-    shap.summary_plot(sv, Xt, feature_names=kept_names, show=False)
+    shap.summary_plot(sv, Xt, feature_names=[_display(n) for n in kept_names],
+                      show=False)
     plt.tight_layout(); plt.savefig(out_dir / "shap_summary.png", dpi=200)
     plt.close("all")
 
     plt.figure()
-    importance[::-1].plot(kind="barh", figsize=(8, max(4, 0.3 * len(feature_names))))
+    disp = importance.rename(index=_display)
+    disp[::-1].plot(kind="barh", figsize=(8, max(4, 0.3 * len(feature_names))))
     plt.xlabel("mean |SHAP value|")
     plt.tight_layout(); plt.savefig(out_dir / "shap_bar.png", dpi=200)
     plt.close("all")

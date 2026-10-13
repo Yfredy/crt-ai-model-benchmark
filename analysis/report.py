@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def write_report(summary_df, comp_df, best_model, shap_method, out_path,
-                 extra=None, quality_notes=None) -> str:
+                 extra=None, quality_notes=None, shap_top=None) -> str:
     extra = extra or {}
     quality_notes = quality_notes or []
     n_folds = extra.get("n_folds", 5)
@@ -46,6 +46,13 @@ def write_report(summary_df, comp_df, best_model, shap_method, out_path,
     ]
     if quality_notes:
         lines += ["## 数据质量备注", ""] + [f"- {n}" for n in quality_notes] + [""]
+    if shap_top is not None and len(shap_top):
+        lines += [
+            "## 最优模型 SHAP 特征重要性（前 10）",
+            "",
+            shap_top.to_frame("mean_abs_shap").to_markdown(floatfmt=".4f"),
+            "",
+        ]
     lines += [
         "## 方法说明（供论文 Methods 复用）",
         "",

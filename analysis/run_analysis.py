@@ -60,7 +60,8 @@ def main():
         extra={"n_folds": n_folds, "n_repeats": n_repeats,
                "inner_folds": inner_folds, "n_events": int(y.sum()),
                "n_total": len(y), "seed": RANDOM_SEED, "device": device},
-        quality_notes=notes)
+        quality_notes=notes,
+        shap_top=shap_res["importance"].head(10))
 
     print("\n" + summary.to_string(index=False))
     print(f"\nReport written to {report_path}")
