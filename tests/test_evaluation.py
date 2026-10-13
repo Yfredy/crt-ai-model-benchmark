@@ -44,9 +44,15 @@ def test_run_comparison_structure(result):
     assert set(fold_df.columns) >= {"model","repeat","fold","auc","brier","sensitivity","specificity","calibration_slope"}
     assert len(fold_df) == 2 * 2 * 2  # models x folds x repeats
     assert fold_df["auc"].between(0, 1).all()
+    n_repeats = 2
     for name, recs in oof.items():
         total = sum(len(idx) for idx, _ in recs)
-        assert total == n  # OOF 覆盖全部样本
+        assert total == n * n_repeats  # 每次重复各覆盖全部样本
+        # 逐重复校验：第 r 次重复的折索引并集应等于全部样本
+        for r in range(n_repeats):
+            reps_idx = np.sort(np.concatenate(
+                [idx for i, (idx, _) in enumerate(recs) if i // 2 == r]))
+            assert list(reps_idx) == list(range(n))
 
 def test_determinism(result):
     fold_df, _ = result

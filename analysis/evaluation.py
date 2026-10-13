@@ -17,7 +17,7 @@ def _logit(p):
 def calibration_slope(y_true, y_prob) -> float:
     z = _logit(np.asarray(y_prob)).reshape(-1, 1)
     y = np.asarray(y_true)
-    lr = LogisticRegression(C=1e6, max_iter=1000).fit(z, y)
+    lr = LogisticRegression(C=1e6, max_iter=10000, tol=1e-10).fit(z, y)
     return float(lr.coef_[0, 0])
 
 
