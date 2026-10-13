@@ -38,11 +38,15 @@ def test_irls_matches_sklearn_unpenalised():
 
 
 def test_irls_wald_self_consistent():
-    """2. p 与 2*norm.sf(|z|) 自洽；置信区间包住系数。"""
+    """2. p 与 2*norm.sf(|z|) 自洽；SE 与独立构造的 inv(X'WX) 一致；置信区间包住系数。"""
     X, y = _synthetic()
     fit = irls_logistic(X, y)
     np.testing.assert_allclose(fit["p"], 2 * norm.sf(np.abs(fit["z"])), rtol=0, atol=0)
     np.testing.assert_allclose(fit["z"], fit["coef"] / fit["se"], rtol=1e-12)
+    A = np.column_stack([np.ones(len(y)), X])
+    mu = 1.0 / (1.0 + np.exp(-(A @ fit["coef"])))
+    se_ref = np.sqrt(np.diag(np.linalg.inv(A.T @ (A * (mu * (1 - mu))[:, None]))))
+    np.testing.assert_allclose(fit["se"], se_ref, rtol=1e-6)
     assert np.all(fit["ci_lo"] < fit["coef"])
     assert np.all(fit["coef"] < fit["ci_hi"])
     assert np.all(fit["se"] > 0)
@@ -115,7 +119,7 @@ def test_table1_on_real_data():
     assert len(t1) == 28
     assert list(t1.columns) == ["variable", "type", "overall", "responder",
                                 "non_responder", "p_value", "smd"]
-    assert bool(t1["p_value"].between(0, 1).all())
+    assert bool((t1["p_value"].isna() | t1["p_value"].between(0, 1)).all())
     assert bool(t1["smd"].notna().all())
     kinds = column_kinds(df)
     assert set(t1.loc[t1["type"] == "binary", "variable"]) == set(kinds["binary"])
@@ -165,6 +169,21 @@ def test_helpers():
     assert np.isnan(_smd([1.0], [1.0, 2.0]))
     assert _smd([1.0, 2.0, 3.0], [4.0, 5.0, 6.0]) == pytest.approx(-3.0)
     assert _smd([1.0, 1.0], [1.0, 1.0]) == 0.0  # pooled == 0
+
+
+def test_table1_binary_missing_and_group_guard():
+    """二值列含缺失时分母只计非缺失；group_col 非 0/1 时报错而不是给出矛盾的分母。"""
+    d = pd.DataFrame({
+        "b": [1.0, np.nan, 0.0, 1.0, 0.0, 1.0],
+        "x": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0],
+        TARGET_COL: [1, 1, 1, 0, 0, 0],
+    })
+    row = table1_by_group(d).set_index("variable").loc["b"]
+    assert row["overall"] == "3/5 (60.0%)"
+    assert row["responder"] == "1/2 (50.0%)"
+    assert row["non_responder"] == "2/3 (66.7%)"
+    with pytest.raises(ValueError):
+        table1_by_group(d.assign(**{TARGET_COL: [1, 1, 1, 0, 0, 2]}))
 
 
 def test_table1_degenerate_column_does_not_crash():

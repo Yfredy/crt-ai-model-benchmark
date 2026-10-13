@@ -103,6 +103,13 @@ def _smd(a, b) -> float:
     return float((a.mean() - b.mean()) / pooled) if pooled > 0 else 0.0
 
 
+def _n_pct(s) -> str:
+    s = pd.Series(s).dropna()
+    if s.empty:
+        return "NA"
+    return f"{int(s.sum())}/{len(s)} ({s.mean() * 100:.1f}%)"
+
+
 def table1_by_group(df, group_col=TARGET_COL) -> pd.DataFrame:
     """稿件 Table 1：应答 vs 非应答的基线特征比较。
 
@@ -110,21 +117,22 @@ def table1_by_group(df, group_col=TARGET_COL) -> pd.DataFrame:
     另附标准化均差 SMD（|SMD| > 0.1 视为有意义的组间差异）。
     """
     df = df.reset_index(drop=True)
+    if not df[group_col].isin([0, 1]).all():
+        raise ValueError(f"group column '{group_col}' must be binary 0/1")
     kinds = column_kinds(df)
     g1, g0 = df[df[group_col] == 1], df[df[group_col] == 0]
     rows = []
     for c in [x for x in df.columns if x != group_col]:
         v = df[c]
         if c in kinds["binary"]:
-            n1, n0 = int(g1[c].sum()), int(g0[c].sum())
+            b1, b0 = g1[c].dropna(), g0[c].dropna()
+            n1, n0 = int(b1.sum()), int(b0.sum())
             try:
-                _, p = fisher_exact([[n1, len(g1) - n1], [n0, len(g0) - n0]])
+                _, p = fisher_exact([[n1, len(b1) - n1], [n0, len(b0) - n0]])
             except ValueError:
                 p = np.nan
-            rows.append({"variable": c, "type": "binary",
-                         "overall": f"{int(v.sum())}/{len(v)} ({v.mean() * 100:.1f}%)",
-                         "responder": f"{n1}/{len(g1)} ({n1 / len(g1) * 100:.1f}%)",
-                         "non_responder": f"{n0}/{len(g0)} ({n0 / len(g0) * 100:.1f}%)",
+            rows.append({"variable": c, "type": "binary", "overall": _n_pct(v),
+                         "responder": _n_pct(b1), "non_responder": _n_pct(b0),
                          "p_value": float(p), "smd": _smd(g1[c], g0[c])})
         else:
             a, b = g1[c].dropna(), g0[c].dropna()
