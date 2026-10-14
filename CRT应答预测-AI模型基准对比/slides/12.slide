@@ -1,0 +1,72 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'column', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ height: 80, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>这些差异是统计显著的，且用三种口径交叉验证</Text>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>CRT 应答预测 · AI 模型基准对比</Text>
+  </Box>
+  <Box style={{ flex: 1, paddingLeft: 40, paddingRight: 40, paddingTop: 18, paddingBottom: 18, background: '#FFFFFF', flexDirection: 'row', gap: 24 }}>
+    <Box style={{ width: 690 }}>
+      <Box style={{ height: 42, background: '#F0F5FC', borderRadius: 8, flexDirection: 'row', alignItems: 'center', paddingLeft: 16, paddingRight: 16 }}>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#0E3F8C' }}>Friedman 总括检验</Text>
+        <Text style={{ fontSize: 15, color: '#4A5568', marginLeft: 12 }}>χ² = 489.3，p = 6.8e-81（37 模型 × 25 区组）→ 模型间差异整体存在</Text>
+      </Box>
+      <Table
+        style={{ width: '100%', height: 300, marginTop: 12 }}
+        defaultTextStyle={{ fontSize: 14.5, textAlign: 'center', color: '#1A2230' }}
+        defaultCellStyle={{
+          border: {
+            left: { width: 1, color: '#E5E7EB' },
+            right: { width: 1, color: '#E5E7EB' },
+            top: { width: 1, color: '#E5E7EB' },
+            bottom: { width: 1, color: '#E5E7EB' },
+          },
+        }}
+        cells={[
+          [
+            { text: 'Nemenyi vs 基线（Holm 校正）', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+            { text: '平均秩', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+            { text: '基线平均秩 18.7', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+            { text: 'p (Holm)', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+          ],
+          [
+            { text: 'LDA_Shrinkage', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+            { text: '6.8', cellStyle: { background: { color: '#E8EFF8' } } },
+            { text: '显著更优', textStyle: { bold: true, color: '#1E4FA8' }, cellStyle: { background: { color: '#E8EFF8' } } },
+            { text: '0.0035', cellStyle: { background: { color: '#E8EFF8' } } },
+          ],
+          ['Stacking_Logit', '7.5', { text: '显著更优', textStyle: { bold: true, color: '#1E4FA8' } }, '0.0087'],
+          ['SuperLearner_NNLS', '8.1', { text: '显著更优', textStyle: { bold: true, color: '#1E4FA8' } }, '0.017'],
+          ['GaussianProcess_RBF', '8.2', { text: '显著更优', textStyle: { bold: true, color: '#1E4FA8' } }, '0.019'],
+          ['SVM_linear', '8.5', { text: '显著更优', textStyle: { bold: true, color: '#1E4FA8' } }, '0.025'],
+          ['MLP（最差）', '33.5', { text: '显著更差', textStyle: { bold: true, color: '#D9534F' } }, '<0.001'],
+          ['TabNet_Deep / MLP_Small 等', '30–31', { text: '显著更差', textStyle: { bold: true, color: '#D9534F' } }, '0.001–0.005'],
+        ]}
+      />
+      <Text style={{ fontSize: 14.5, color: '#4A5568', lineHeight: 1.7, marginTop: 12 }}>
+        临界差 CD = 16.67：与基线平均秩相差超过 CD 的模型才判定显著。共 5 个模型显著更优，5 个模型（含 4 个深度模型）显著更差。
+      </Text>
+    </Box>
+    <Box style={{ flex: 1 }}>
+      <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 16, height: 210 }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>口径 ②：折级 Wilcoxon + Holm</Text>
+        <Text style={{ fontSize: 14.5, color: '#4A5568', lineHeight: 1.7, marginTop: 8 }}>
+          Stage B 嵌套调参后，前 8 名全部显著优于基线：<br />
+          ΔAUC = +0.037 ~ +0.057，<br />
+          Holm 校正 p = 0.0036 ~ 0.049。
+        </Text>
+      </Box>
+      <Box style={{ marginTop: 12, background: '#FFF8E6', border: '1px solid #F0DFA8', borderRadius: 10, padding: 16, height: 178 }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#7A6420' }}>口径 ③：患者层面 DeLong（诚实披露）</Text>
+        <Text style={{ fontSize: 14.5, color: '#7A6420', lineHeight: 1.65, marginTop: 8 }}>
+          池化折外预测上 ΔAUC = 0.041 ~ 0.054，但 Holm 校正后 p = 0.12 ~ 0.26，未达显著。三种口径里它最保守——论文写作时按此口径陈述，避免过度声称。
+        </Text>
+      </Box>
+      <Text style={{ fontSize: 13.5, color: '#8B97A8', lineHeight: 1.6, marginTop: 10 }}>
+        校准补充：SuperLearner 斜率 1.00 / 截距 0.01（接近理想）；LDA_Shrinkage 斜率 0.63 偏保守，部署前宜再校准。
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 13, color: '#8B97A8' }}>南京医科大学第一附属医院 · 心律失常团队</Text>
+    <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#1E4FA8' }}>12 / 15</Text>
+  </Box>
+</Slide>

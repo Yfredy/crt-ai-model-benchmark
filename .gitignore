@@ -7,3 +7,11 @@ __pycache__/
 outputs_v1/
 .workbuddy/
 *.log
+
+# 临床患者原始数据：禁止入库（含历史），仅本地保留供分析使用
+data.xlsx
+data*.xlsx
+
+# slidep 演示工具内部缓存（可再生成，非交付物）
+CRT应答预测-AI模型基准对比/.cache/
+CRT应答预测-AI模型基准对比/.slidep/

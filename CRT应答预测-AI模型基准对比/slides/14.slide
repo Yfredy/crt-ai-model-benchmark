@@ -1,0 +1,44 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'column', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ height: 80, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>模型为什么这样选：SHAP 可解释性</Text>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>CRT 应答预测 · AI 模型基准对比</Text>
+  </Box>
+  <Box style={{ flex: 1, paddingLeft: 40, paddingRight: 40, paddingTop: 20, paddingBottom: 20, background: '#FFFFFF', flexDirection: 'row', gap: 30 }}>
+    <Box style={{ width: 500, alignItems: 'center' }}>
+      <Box style={{ width: 480, background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 12, padding: 14 }}>
+        <Image src="assets/shap_bar.png" style={{ width: 452, height: 475, objectFit: 'contain' }} />
+      </Box>
+      <Text style={{ fontSize: 12, color: '#8B97A8', marginTop: 6 }}>最优模型（LDA_Shrinkage）SHAP 重要性，KernelExplainer，全部 28 个特征</Text>
+    </Box>
+    <Box style={{ flex: 1, justifyContent: 'center' }}>
+      <Box style={{ width: 56, height: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#0E3F8C', marginTop: 12 }}>重要性前 5 的特征</Text>
+      <Box style={{ marginTop: 18, gap: 12 }}>
+        {[
+          { r: '1', n: 'LVESD', d: '左室收缩末内径 —— 左室重构程度' },
+          { r: '2', n: 'LVEF_Echo', d: '超声左室射血分数 —— 收缩功能' },
+          { r: '3', n: 'NT_proBNP', d: '神经激素水平（有序 1–5 分级）' },
+          { r: '4', n: 'QRSd_ms', d: 'QRS 时程 —— 电学失同步' },
+          { r: '5', n: 'NYHA', d: '心功能分级' },
+        ].map((f, i) => (
+          <Box key={i} style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 16, paddingRight: 16, paddingTop: 12, paddingBottom: 12 }}>
+            <Box style={{ width: 34, height: 34, borderRadius: 17, background: '#1E4FA8', alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' }}>{f.r}</Text>
+            </Box>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#0E3F8C', marginLeft: 14 }}>{f.n}</Text>
+            <Text style={{ fontSize: 14, color: '#4A5568', marginLeft: 12, flex: 1 }}>{f.d}</Text>
+          </Box>
+        ))}
+      </Box>
+      <Box style={{ marginTop: 20, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 18 }}>
+        <Text style={{ fontSize: 16, color: '#1A2230', lineHeight: 1.7 }}>
+          与已发表论文的临床叙事<span style={{ fontWeight: 'bold', color: '#1E4FA8' }}>完全一致</span>：左室重构更重、神经激素水平更高、电学失同步更明显的患者更难获得应答。模型不是在"背数据"，而是在复述临床直觉。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 13, color: '#8B97A8' }}>南京医科大学第一附属医院 · 心律失常团队</Text>
+    <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#1E4FA8' }}>14 / 15</Text>
+  </Box>
+</Slide>

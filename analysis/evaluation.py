@@ -83,6 +83,11 @@ def summarize(fold_df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def holm_adjust(pvals):
+    """Holm 步长法多重比较校正（公开入口，供扩展模块复用）。"""
+    return _holm(pvals)
+
+
 def _holm(pvals):
     pvals = np.asarray(pvals, dtype=float)
     order = np.argsort(pvals)

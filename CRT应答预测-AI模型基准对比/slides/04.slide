@@ -1,0 +1,55 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'column', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ height: 80, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>编辑的退修意见</Text>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>CRT 应答预测 · AI 模型基准对比</Text>
+  </Box>
+  <Box style={{ flex: 1, paddingLeft: 40, paddingRight: 40, paddingTop: 20, paddingBottom: 20, background: '#FFFFFF' }}>
+    <Box style={{ flexDirection: 'row', gap: 24, height: 440 }}>
+      <Box style={{ width: 700, background: '#0E3F8C', borderRadius: 12, padding: 36, justifyContent: 'space-between' }}>
+        <Box>
+          <Text style={{ fontSize: 60, fontWeight: 'bold', color: 'rgba(255,255,255,0.35)', lineHeight: 1 }}>“</Text>
+          <Text style={{ fontSize: 20, color: '#FFFFFF', lineHeight: 1.85, marginTop: 8 }}>
+            于老师，我看了，这个稿件<span style={{ fontWeight: 'bold', color: '#FFC107' }}>没有涉及 AI 算法、深度学习、影像智能重建或分析、大数据挖掘</span>这些 ITM 明确列出的方向。它更像是一篇传统的影像生物标志物研究，偏临床预测模型，而不是智能转化医学的范畴，您看看能不能增加这方面的内容。
+          </Text>
+        </Box>
+        <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', textAlign: 'right' }}>—— ITM 编辑退修意见（2026 年 10 月）</Text>
+      </Box>
+      <Box style={{ flex: 1, justifyContent: 'space-between' }}>
+        <Box style={{ background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 20, height: 136 }}>
+          <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Box style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4, background: '#1E4FA8', borderRadius: 10 }}>
+              <Text style={{ fontSize: 12, color: '#FFFFFF' }}>判断 1</Text>
+            </Box>
+            <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', marginLeft: 12 }}>这是方向性要求</Text>
+          </Box>
+          <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>不是文字润色，而是必须真正补上 AI 建模内容，否则无法进入 ITM 的收稿范围。</Text>
+        </Box>
+        <Box style={{ background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 20, height: 136 }}>
+          <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Box style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4, background: '#1E4FA8', borderRadius: 10 }}>
+              <Text style={{ fontSize: 12, color: '#FFFFFF' }}>判断 2</Text>
+            </Box>
+            <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', marginLeft: 12 }}>同一套数据才可比</Text>
+          </Box>
+          <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>沿用已发表 LASSO 研究的 163 例队列与同一组变量，新旧结果才有可比性。</Text>
+        </Box>
+        <Box style={{ background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 20, height: 136 }}>
+          <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Box style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4, background: '#1E4FA8', borderRadius: 10 }}>
+              <Text style={{ fontSize: 12, color: '#FFFFFF' }}>判断 3</Text>
+            </Box>
+            <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#1A2230', marginLeft: 12 }}>一次投入，两篇产出</Text>
+          </Box>
+          <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>基准对比支撑新 article，方法学梳理同时喂给综述。</Text>
+        </Box>
+      </Box>
+    </Box>
+    <Box style={{ marginTop: 24, height: 56, background: '#1E4FA8', borderRadius: 8, flexDirection: 'row', alignItems: 'center', paddingLeft: 24, paddingRight: 24 }}>
+      <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#FFFFFF' }}>本页落点：要做的不是"再加一段 AI"，而是回答——这批数据到底适配哪一种 AI 模型？</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 13, color: '#8B97A8' }}>南京医科大学第一附属医院 · 心律失常团队</Text>
+    <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#1E4FA8' }}>04 / 15</Text>
+  </Box>
+</Slide>

@@ -1,0 +1,5 @@
+model,mean_rank,sd_rank,times_best,times_top3
+LDA_Shrinkage,1.0,0.0,5,5
+Stacking_Logit,2.6,0.8944271909999159,0,4
+SuperLearner_NNLS,2.8,0.4472135954999579,0,5
+GaussianProcess_RBF,3.6,0.8944271909999161,0,1

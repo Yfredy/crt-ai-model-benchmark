@@ -1,0 +1,37 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', paddingLeft: 90, paddingRight: 90, paddingTop: 60, paddingBottom: 60, justifyContent: 'center', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ alignItems: 'center' }}>
+    <Text style={{ fontSize: 15, color: '#3D7BD9', letterSpacing: 4 }}>CONCLUSION</Text>
+    <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0E3F8C', lineHeight: 1.5, textAlign: 'center', marginTop: 18 }}>
+      小样本临床数据上，适配的方案是<span style={{ color: '#1E4FA8' }}>收缩判别与强正则方法</span>，<br />不是更深的网络。
+    </Text>
+    <Box style={{ width: 72, height: 5, background: '#1E4FA8', marginTop: 24 }} />
+  </Box>
+  <Box style={{ marginTop: 36, gap: 13 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 15, paddingBottom: 15 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 18.5, color: '#1A2230', marginLeft: 18 }}>
+        37 种方案系统评测：<Text style={{ fontWeight: 'bold', color: '#1E4FA8' }}>LDA_Shrinkage 0.809</Text> 居首，5 个模型经 Nemenyi 检验显著优于已发表 LASSO 基线（0.746，第 19/37 位）
+      </Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 15, paddingBottom: 15 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#D9534F' }} />
+      <Text style={{ fontSize: 18.5, color: '#1A2230', marginLeft: 18 }}>
+        深度学习六种变体<span style={{ fontWeight: 'bold', color: '#D9534F' }}>全部低于基线</span>（族均 0.627），4 种经检验显著更差——回应编辑"补 AI"的同时给出诚实的负结果
+      </Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 15, paddingBottom: 15 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 18.5, color: '#1A2230', marginLeft: 18 }}>
+        结论经 4 种重采样 + 5 种随机种子交叉确认；SHAP 前列特征（systolic_match、NS_VT、LVEF_Echo、LVESD）与临床叙事一致
+      </Text>
+    </Box>
+  </Box>
+  <Box style={{ marginTop: 32, height: 58, background: '#0E3F8C', borderRadius: 8, flexDirection: 'row', alignItems: 'center', paddingLeft: 24, paddingRight: 24, justifyContent: 'space-between' }}>
+    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFFFFF' }}>下一步</Text>
+    <Text style={{ fontSize: 15.5, color: '#DCE6F5' }}>① 以 LDA_Shrinkage 为核心撰写对比论文　② 前瞻性外部队列验证　③ 部署前对最优模型做概率再校准</Text>
+  </Box>
+  <Box style={{ marginTop: 18, flexDirection: 'row', justifyContent: 'space-between' }}>
+    <Text style={{ fontSize: 13, color: '#8B97A8' }}>完整结果：outputs/benchmark/report.md（含可复用 Methods 文本与全部数据表）</Text>
+    <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#1E4FA8' }}>15 / 15</Text>
+  </Box>
+</Slide>

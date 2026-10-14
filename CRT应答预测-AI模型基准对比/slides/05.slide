@@ -1,0 +1,69 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'column', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ height: 80, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>数据与建模任务</Text>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>CRT 应答预测 · AI 模型基准对比</Text>
+  </Box>
+  <Box style={{ flex: 1, paddingLeft: 40, paddingRight: 40, paddingTop: 20, paddingBottom: 20, background: '#FFFFFF', flexDirection: 'row', gap: 28 }}>
+    <Box style={{ width: 330, justifyContent: 'center' }}>
+      <Box style={{ width: 56, height: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#0E3F8C', marginTop: 16, lineHeight: 1.4 }}>一份队列，<br />一个明确的<br />预测任务</Text>
+      <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.75, marginTop: 22 }}>
+        数据来自南京医科大学第一附属医院 2010–2020 年药物难治性心衰 CRT 患者，与已发表论文（Jiang et al., QIMS 2025）完全同源。
+      </Text>
+      <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.75, marginTop: 14 }}>
+        全部变量均为数值型，无需复杂特征工程即可直接进入统一对比框架。
+      </Text>
+    </Box>
+    <Box style={{ flex: 1 }}>
+      <Box style={{ flexDirection: 'row', gap: 16 }}>
+        <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 10, padding: 18, alignItems: 'center' }}>
+          <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1.1 }}>163</Text>
+          <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>例患者</Text>
+        </Box>
+        <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 10, padding: 18, alignItems: 'center' }}>
+          <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1.1 }}>29</Text>
+          <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>列变量</Text>
+        </Box>
+        <Box style={{ flex: 1, background: '#F0F5FC', borderRadius: 10, padding: 18, alignItems: 'center' }}>
+          <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1.1 }}>93:70</Text>
+          <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>应答 : 不应答</Text>
+        </Box>
+      </Box>
+      <Table
+        style={{ width: '100%', height: 238, marginTop: 16 }}
+        defaultTextStyle={{ fontSize: 15, textAlign: 'center', color: '#1A2230' }}
+        defaultCellStyle={{
+          border: {
+            left: { width: 1, color: '#E5E7EB' },
+            right: { width: 1, color: '#E5E7EB' },
+            top: { width: 1, color: '#E5E7EB' },
+            bottom: { width: 1, color: '#E5E7EB' },
+          },
+        }}
+        cells={[
+          [
+            { text: '变量类别', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+            { text: '具体变量', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+            { text: '类型', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+          ],
+          ['人口学 / 合并症', 'Gender_male, Age, DCM, Hypertension, Diabetes', '连续 + 二分类'],
+          ['心电图 / 心律', 'QRSd_ms, NS_VT', '连续 + 二分类'],
+          ['化验 / 功能分级', 'NT_proBNP（有序 1–5）, NYHA（2–4）', '有序分类'],
+          ['超声心动图', 'EDV, ESV, LVEDD, LVESD, LVEF_Echo', '连续'],
+          ['SPECT 影像 / 相位', 'LVEF_SPECT, Rest_Scar_Burden, PSD / PBW, match, lead_in_scar', '连续 + 二分类'],
+          ['用药', 'ARB, ACEI, βblocker, Diuretic, Spironolactone', '二分类'],
+        ]}
+      />
+      <Box style={{ marginTop: 16, flexDirection: 'row', alignItems: 'center', background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 8, paddingLeft: 18, paddingRight: 18, paddingTop: 14, paddingBottom: 14 }}>
+        <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#D9534F' }} />
+        <Text style={{ fontSize: 15, color: '#4A5568', marginLeft: 14, flex: 1 }}>
+          数据质量备注：Age 有 1 例取值 165（疑录入错误，保留原值以与已发表队列一致）；全表 0 缺失、无重复行。
+        </Text>
+      </Box>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 13, color: '#8B97A8' }}>南京医科大学第一附属医院 · 心律失常团队</Text>
+    <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#1E4FA8' }}>05 / 15</Text>
+  </Box>
+</Slide>

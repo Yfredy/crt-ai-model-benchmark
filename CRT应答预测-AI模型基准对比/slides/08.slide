@@ -1,0 +1,55 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'column', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ height: 80, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>三段式评测：先广筛，再精调，最后交叉验证稳健性</Text>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>CRT 应答预测 · AI 模型基准对比</Text>
+  </Box>
+  <Box style={{ flex: 1, paddingLeft: 40, paddingRight: 40, paddingTop: 20, paddingBottom: 20, background: '#FFFFFF' }}>
+    <svg width={1200} height={196} viewBox='0 0 1200 210'>
+      <rect x='8' y='20' width='360' height='150' rx='10' fill='#F0F5FC' stroke='#1E4FA8' strokeWidth='1.5' />
+      <text x='188' y='52' textAnchor='middle' fontSize='19' fontWeight='bold' fill='#0E3F8C'>Stage A · 全模型广筛</text>
+      <text x='188' y='82' textAnchor='middle' fontSize='14' fill='#4A5568'>37 模型 × 5 折 × 5 次重复分层 CV</text>
+      <text x='188' y='106' textAnchor='middle' fontSize='14' fill='#4A5568'>固定超参，同一套划分公平排队</text>
+      <text x='188' y='138' textAnchor='middle' fontSize='13' fill='#8B97A8'>产出：总榜 / 家族对比 / Friedman 检验</text>
+      <line x1='372' y1='95' x2='408' y2='95' stroke='#8B97A8' strokeWidth='2' />
+      <polygon points='408,88 420,95 408,102' fill='#8B97A8' />
+      <rect x='424' y='20' width='360' height='150' rx='10' fill='#1E4FA8' stroke='#1E4FA8' strokeWidth='1.5' />
+      <text x='604' y='52' textAnchor='middle' fontSize='19' fontWeight='bold' fill='#FFFFFF'>Stage B · 嵌套调参</text>
+      <text x='604' y='82' textAnchor='middle' fontSize='14' fill='#DCE6F5'>总榜前 8 名进入内层 3 折网格搜索</text>
+      <text x='604' y='106' textAnchor='middle' fontSize='14' fill='#DCE6F5'>调参只发生在训练折内，无泄漏</text>
+      <text x='604' y='138' textAnchor='middle' fontSize='13' fill='rgba(255,255,255,0.7)'>产出：最终排名 / 三重显著性比较</text>
+      <line x1='788' y1='95' x2='824' y2='95' stroke='#8B97A8' strokeWidth='2' />
+      <polygon points='824,88 836,95 824,102' fill='#8B97A8' />
+      <rect x='840' y='20' width='352' height='150' rx='10' fill='#F0F5FC' stroke='#1E4FA8' strokeWidth='1.5' />
+      <text x='1016' y='52' textAnchor='middle' fontSize='19' fontWeight='bold' fill='#0E3F8C'>Stage C · 稳健性确认</text>
+      <text x='1016' y='82' textAnchor='middle' fontSize='14' fill='#4A5568'>留一法 LOOCV · 100 次蒙特卡洛留出</text>
+      <text x='1016' y='106' textAnchor='middle' fontSize='14' fill='#4A5568'>Bootstrap 乐观度校正 · 5 种子重复 CV</text>
+      <text x='1016' y='138' textAnchor='middle' fontSize='13' fill='#8B97A8'>产出：结论在 4 种重采样下是否一致</text>
+    </svg>
+    <Box style={{ flexDirection: 'row', gap: 14, marginTop: 14 }}>
+      <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 8, padding: 14, height: 162 }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>三重显著性口径</Text>
+        <Text style={{ fontSize: 14, color: '#4A5568', lineHeight: 1.7, marginTop: 8 }}>
+          ① Friedman 总括 + Nemenyi 事后检验（37 模型整体排序，Demšar 2006）<br />
+          ② 折级配对 Wilcoxon + Holm 校正（同一外层折配对）<br />
+          ③ 池化折外预测 DeLong 检验（患者层面、阈值无关）
+        </Text>
+      </Box>
+      <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 8, padding: 14, height: 162 }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>指标覆盖四个维度</Text>
+        <Text style={{ fontSize: 14, color: '#4A5568', lineHeight: 1.7, marginTop: 8 }}>
+          区分度：AUC · 平均精确率 · MCC<br />
+          校准度：Brier · 校准斜率/截距 · ICI<br />
+          阈值点：Youden 敏感性/特异性 · PPV · NPV<br />
+          临床效用：决策曲线净收益（5%–95% 阈值网格均值）
+        </Text>
+      </Box>
+    </Box>
+    <Box style={{ marginTop: 10, height: 48, background: '#0E3F8C', borderRadius: 8, flexDirection: 'row', alignItems: 'center', paddingLeft: 20, paddingRight: 20 }}>
+      <Text style={{ fontSize: 16, color: '#FFFFFF' }}>防泄漏三件套：预处理内嵌管道 · 单变量筛选只在训练折 · 调参在外层 CV 内部再嵌套一层</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 13, color: '#8B97A8' }}>南京医科大学第一附属医院 · 心律失常团队</Text>
+    <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#1E4FA8' }}>08 / 15</Text>
+  </Box>
+</Slide>

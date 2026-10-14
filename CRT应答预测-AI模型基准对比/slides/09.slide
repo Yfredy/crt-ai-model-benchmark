@@ -1,0 +1,25 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', paddingLeft: 80, paddingRight: 80, justifyContent: 'center', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <Text style={{ fontSize: 190, fontWeight: 'bold', color: '#E8EFF8', lineHeight: 1 }}>03</Text>
+    <Box style={{ marginLeft: 40, flex: 1 }}>
+      <Text style={{ fontSize: 15, color: '#3D7BD9', letterSpacing: 4 }}>SECTION 03</Text>
+      <Text style={{ fontSize: 42, fontWeight: 'bold', color: '#0E3F8C', marginTop: 10 }}>结果与发现</Text>
+      <Box style={{ width: 72, height: 5, background: '#1E4FA8', marginTop: 18 }} />
+    </Box>
+  </Box>
+  <Box style={{ marginTop: 56, gap: 18 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 20, color: '#1A2230', marginLeft: 18 }}>37 模型总榜：LDA_Shrinkage 以 0.809 居首，已发表基线列第 19 位</Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 20, color: '#1A2230', marginLeft: 18 }}>Friedman + Nemenyi：5 个模型显著优于基线，4 个深度模型显著更差</Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 20, color: '#1A2230', marginLeft: 18 }}>SHAP 可解释性：与已发表的临床叙事一致</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 8, background: '#1E4FA8' }} />
+</Slide>

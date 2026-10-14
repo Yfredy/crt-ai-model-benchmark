@@ -1,0 +1,21 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'row', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ width: 700, height: 720, background: '#0E3F8C', paddingLeft: 56, paddingRight: 56, paddingTop: 70, paddingBottom: 70, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.65)', letterSpacing: 3 }}>AI MODEL BENCHMARK FOR CRT RESPONSE</Text>
+    <Text style={{ fontSize: 50, fontWeight: 'bold', color: '#FFFFFF', lineHeight: 1.3, marginTop: 22 }}>
+      CRT 应答预测：<br />哪种建模方案最适配？
+    </Text>
+    <Box style={{ width: 64, height: 4, background: '#FFC107', marginTop: 26 }} />
+    <Text style={{ fontSize: 19, color: '#DCE6F5', marginTop: 24, lineHeight: 1.6 }}>
+      37 种建模方案 · 六大方法族 · 三段式评测<br />广筛 → 嵌套调参 → 四种重采样交叉验证，全程无数据泄漏
+    </Text>
+    <Box style={{ height: 1, background: 'rgba(255,255,255,0.25)', marginTop: 40, marginBottom: 18 }} />
+    <Text style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)' }}>南京医科大学第一附属医院 · 心律失常团队</Text>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', marginTop: 8 }}>汇报人：于老师　|　2026 年 10 月</Text>
+  </Box>
+  <Box style={{ flex: 1, height: 720, background: '#F7F9FC', alignItems: 'center', justifyContent: 'center', padding: 28 }}>
+    <Box style={{ width: 480, background: '#FFFFFF', borderRadius: 12, padding: 16, boxShadow: '0 10px 30px rgba(14,63,140,0.14)' }}>
+      <Image src="assets/family_boxplot.png" style={{ width: 448, height: 478, objectFit: 'contain' }} />
+      <Text style={{ fontSize: 13, color: '#8B97A8', textAlign: 'center', marginTop: 8 }}>真实运行产物：37 个模型的折外 AUC 分布（按方法族着色）</Text>
+    </Box>
+  </Box>
+</Slide>

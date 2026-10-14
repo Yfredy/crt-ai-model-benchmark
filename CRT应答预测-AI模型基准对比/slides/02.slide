@@ -1,0 +1,39 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'row', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ width: 360, height: 720, background: '#0E3F8C', paddingLeft: 44, paddingRight: 44, paddingTop: 80, paddingBottom: 80, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', letterSpacing: 4 }}>CONTENTS</Text>
+    <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#FFFFFF', marginTop: 12 }}>目录</Text>
+    <Box style={{ width: 48, height: 4, background: '#FFC107', marginTop: 22 }} />
+    <Text style={{ fontSize: 15, color: '#DCE6F5', lineHeight: 1.8, marginTop: 30 }}>
+      三个问题，一条主线：<br />为什么做 · 怎么比才公平 · 结论有多稳
+    </Text>
+  </Box>
+  <Box style={{ flex: 1, height: 720, background: '#FFFFFF', paddingLeft: 60, paddingRight: 60, paddingTop: 70, paddingBottom: 70, justifyContent: 'center' }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 22, borderBottom: '1px solid #E5E7EB' }}>
+      <Box style={{ width: 64, height: 64, background: '#1E4FA8', borderRadius: 8, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>01</Text>
+      </Box>
+      <Box style={{ marginLeft: 26, flex: 1 }}>
+        <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230' }}>研究动因与数据</Text>
+        <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>编辑退修意见 · 163 例 CRT 队列 · 因变量与 28 个候选自变量</Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 22, paddingBottom: 22, borderBottom: '1px solid #E5E7EB' }}>
+      <Box style={{ width: 64, height: 64, background: '#1E4FA8', borderRadius: 8, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>02</Text>
+      </Box>
+      <Box style={{ marginLeft: 26, flex: 1 }}>
+        <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230' }}>评测设计：37 种方案怎么比</Text>
+        <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>六大方法族 · 三段式评测（广筛 → 嵌套调参 → 稳健性）· 多重统计检验</Text>
+      </Box>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 22 }}>
+      <Box style={{ width: 64, height: 64, background: '#1E4FA8', borderRadius: 8, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>03</Text>
+      </Box>
+      <Box style={{ marginLeft: 26, flex: 1 }}>
+        <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230' }}>结果与发现</Text>
+        <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>37 模型总榜 · 家族对比 · 显著性与稳健性 · SHAP 可解释性</Text>
+      </Box>
+    </Box>
+  </Box>
+</Slide>

@@ -1,0 +1,16 @@
+{
+  "finalists": [
+    "LDA_Shrinkage",
+    "Stacking_Logit",
+    "GaussianProcess_RBF",
+    "SuperLearner_NNLS",
+    "SVM_linear",
+    "SVM_poly",
+    "ExtraTrees",
+    "Logistic_Ridge",
+    "Logistic_LASSO_baseline"
+  ],
+  "quick": false,
+  "top_k": 8,
+  "seed": 2025
+}

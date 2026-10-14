@@ -1,0 +1,25 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', paddingLeft: 80, paddingRight: 80, justifyContent: 'center', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <Text style={{ fontSize: 190, fontWeight: 'bold', color: '#E8EFF8', lineHeight: 1 }}>02</Text>
+    <Box style={{ marginLeft: 40, flex: 1 }}>
+      <Text style={{ fontSize: 15, color: '#3D7BD9', letterSpacing: 4 }}>SECTION 02</Text>
+      <Text style={{ fontSize: 42, fontWeight: 'bold', color: '#0E3F8C', marginTop: 10 }}>对比设计与方法</Text>
+      <Box style={{ width: 72, height: 5, background: '#1E4FA8', marginTop: 18 }} />
+    </Box>
+  </Box>
+  <Box style={{ marginTop: 56, gap: 18 }}>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 20, color: '#1A2230', marginLeft: 18 }}>37 个候选模型：六大方法族，从正则线性模型到深度学习与集成之集成</Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 20, color: '#1A2230', marginLeft: 18 }}>嵌套重复分层交叉验证：外层 5 折 × 5 次重复，内层 3 折调参</Text>
+    </Box>
+    <Box style={{ flexDirection: 'row', alignItems: 'center', background: '#F0F5FC', borderRadius: 8, paddingLeft: 24, paddingRight: 24, paddingTop: 16, paddingBottom: 16 }}>
+      <Box style={{ width: 10, height: 10, borderRadius: 5, background: '#1E4FA8' }} />
+      <Text style={{ fontSize: 20, color: '#1A2230', marginLeft: 18 }}>预处理与调参只发生在训练折内，全程杜绝数据泄漏</Text>
+    </Box>
+  </Box>
+  <Box style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 8, background: '#1E4FA8' }} />
+</Slide>

@@ -1,0 +1,67 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', flexDirection: 'column', fontFamily: '"Microsoft YaHei","Source Han Sans SC","Noto Sans SC",sans-serif' }}>
+  <Box style={{ height: 80, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#FFFFFF' }}>方法全景：37 种建模方案，六大方法族</Text>
+    <Text style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>CRT 应答预测 · AI 模型基准对比</Text>
+  </Box>
+  <Box style={{ flex: 1, paddingLeft: 40, paddingRight: 40, paddingTop: 18, paddingBottom: 18, background: '#FFFFFF' }}>
+    <Box style={{ flexDirection: 'row', gap: 12 }}>
+      {[
+        { f: '线性 / 正则化', n: 10, c: '#1B4F9C', m: 'LASSO · Ridge · ElasticNet · 逐步AIC · LDA/QDA · 朴素贝叶斯 · 多项式展开' },
+        { f: '核方法 / 贝叶斯', n: 5, c: '#2E86AB', m: 'SVM（线性/多项式/RBF）· 高斯过程 · KNN' },
+      ].map((x, i) => (
+        <Box key={i} style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderTop: '4px solid ' + x.c, borderRadius: 8, padding: 14, height: 128 }}>
+          <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ fontSize: 19, fontWeight: 'bold', color: x.c }}>{x.f}</Text>
+            <Box style={{ marginLeft: 10, paddingLeft: 10, paddingRight: 10, paddingTop: 2, paddingBottom: 2, background: x.c, borderRadius: 10 }}>
+              <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#FFFFFF' }}>{x.n} 个</Text>
+            </Box>
+          </Box>
+          <Text style={{ fontSize: 13.5, color: '#4A5568', lineHeight: 1.6, marginTop: 8 }}>{x.m}</Text>
+        </Box>
+      ))}
+    </Box>
+    <Box style={{ flexDirection: 'row', gap: 12, marginTop: 12 }}>
+      {[
+        { f: '树模型与集成', n: 9, c: '#2A9D5C', m: '决策树 · RF · ExtraTrees · GBDT · HistGB · XGBoost · LightGBM · AdaBoost · Bagging' },
+        { f: '深度学习', n: 6, c: '#C0392B', m: 'MLP（小/中/深）· TabNet · TabNet-Deep · FT-Transformer（自研实现）' },
+      ].map((x, i) => (
+        <Box key={i} style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderTop: '4px solid ' + x.c, borderRadius: 8, padding: 14, height: 128 }}>
+          <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ fontSize: 19, fontWeight: 'bold', color: x.c }}>{x.f}</Text>
+            <Box style={{ marginLeft: 10, paddingLeft: 10, paddingRight: 10, paddingTop: 2, paddingBottom: 2, background: x.c, borderRadius: 10 }}>
+              <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#FFFFFF' }}>{x.n} 个</Text>
+            </Box>
+          </Box>
+          <Text style={{ fontSize: 13.5, color: '#4A5568', lineHeight: 1.6, marginTop: 8 }}>{x.m}</Text>
+        </Box>
+      ))}
+    </Box>
+    <Box style={{ flexDirection: 'row', gap: 12, marginTop: 12 }}>
+      {[
+        { f: '集成之集成', n: 3, c: '#8E44AD', m: '软投票 · Stacking（折内元特征，天生无泄漏）· Super Learner（非负权重）' },
+        { f: '筛选消融', n: 4, c: '#7F8C8D', m: 'SVM/XGBoost/MLP/RF 的"单变量筛选版"，用于量化特征筛选的得失' },
+      ].map((x, i) => (
+        <Box key={i} style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderTop: '4px solid ' + x.c, borderRadius: 8, padding: 14, height: 118 }}>
+          <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ fontSize: 19, fontWeight: 'bold', color: x.c }}>{x.f}</Text>
+            <Box style={{ marginLeft: 10, paddingLeft: 10, paddingRight: 10, paddingTop: 2, paddingBottom: 2, background: x.c, borderRadius: 10 }}>
+              <Text style={{ fontSize: 13, fontWeight: 'bold', color: '#FFFFFF' }}>{x.n} 个</Text>
+            </Box>
+          </Box>
+          <Text style={{ fontSize: 13.5, color: '#4A5568', lineHeight: 1.6, marginTop: 8 }}>{x.m}</Text>
+        </Box>
+      ))}
+      <Box style={{ flex: 1, background: '#0E3F8C', borderRadius: 8, padding: 14, height: 118, justifyContent: 'center' }}>
+        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFFFFF' }}>含已发表 LASSO 基线</Text>
+        <Text style={{ fontSize: 13.5, color: '#DCE6F5', lineHeight: 1.6, marginTop: 8 }}>与 Jiang et al. QIMS 2025 完全同源的列线图方法，作为参照系</Text>
+      </Box>
+    </Box>
+    <Box style={{ marginTop: 14, height: 50, background: '#F0F5FC', borderRadius: 8, flexDirection: 'row', alignItems: 'center', paddingLeft: 20, paddingRight: 20, border: '1px solid #D6DCE5' }}>
+      <Text style={{ fontSize: 16, color: '#0E3F8C' }}>全部 37 个模型使用同一套数据划分、同一种预处理管道、同一随机种子 —— 唯一的变量是"建模方法本身"</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB', background: '#F7F9FC' }}>
+    <Text style={{ fontSize: 13, color: '#8B97A8' }}>南京医科大学第一附属医院 · 心律失常团队</Text>
+    <Text style={{ fontSize: 14, fontWeight: 'bold', color: '#1E4FA8' }}>07 / 15</Text>
+  </Box>
+</Slide>
